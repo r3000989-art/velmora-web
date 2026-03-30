@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velmora Hardcore</title><link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet"><style>
+body {
+    margin: 0;
+    font-family: 'Minecraft', sans-serif;
+    background: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.header {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.logo {
+    font-size: 45px;
+    color: orange;
+    text-shadow: 0 0 15px red;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px red; }
+    to { text-shadow: 0 0 30px orange; }
+}
+
+.ip-box {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid orange;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, red, orange);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: 'Minecraft', sans-serif;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px orange;
+}
+
+.section {
+    padding: 40px;
+    text-align: center;
+}
+
+.card {
+    background: rgba(255, 80, 0, 0.1);
+    border: 1px solid orange;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+    width: 230px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px red;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #000;
+    border-top: 1px solid orange;
+}
+</style></head><body>
+<canvas id="particles"></canvas><div class="header">
+    <div class="logo">VELMORA HARDCORE</div><div class="ip-box">
+    IP: <span id="ip">velmorarp.ultraga.me</span><br>
+    <button onclick="copyIP()">COPY IP</button>
+</div>
+
+</div><div class="section">
+    <h2>🔥 FITUR SERVER</h2><div class="card">/Tas</div>
+<div class="card">/Report</div>
+<div class="card">/Riwayat</div>
+<div class="card">Kit OP</div>
+<div class="card">Mace Custom</div>
+<div class="card">Grappling Hook</div>
+
+</div><div class="section">
+    <h2>⚔️ LIST MACE</h2><div class="card">Wind Mace</div>
+<div class="card">Glacial Mace</div>
+<div class="card">Strength Mace</div>
+<div class="card">Void Mace</div>
+
+</div><div class="section">
+    <h2>💎 DONASI</h2><div class="card">
+    Support server agar tetap hidup 🔥<br><br>
+    <button onclick="donate()">DONASI SEKARANG</button>
+</div>
+
+</div><div class="footer">
+    © 2026 Velmora Hardcore Server
+</div><script>
+function copyIP() {
+    navigator.clipboard.writeText("velmorarp.ultraga.me");
+    alert("IP berhasil di copy!");
+}
+
+function donate() {
+    alert("Hubungi admin untuk donasi!");
+}
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 100; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 2,
+        dy: (Math.random() - 0.5) * 2
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "orange";
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script></body>
+</html>
